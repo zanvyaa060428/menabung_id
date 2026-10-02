@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transaksi - Menabung.Id</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #16834b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        h2 {
+            color: #16834b;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .jenis {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .jenis button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #e8f5ee;
+            color: #16834b;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .jenis button.active {
+            background: #16834b;
+            color: white;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #16834b;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+{% if messages %}
+    {% for message in messages %}
+        <div style="
+            background: #e8f5ee;
+            color: #16834b;
+            padding: 13px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        ">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+  
+    <a href="{% url 'admin_dashboard' %}" class="back">
+        ← Kembali
+    </a>
+
+    <h2>💰 Transaksi Tabungan</h2>
+
+    <p class="subtitle">
+        Catat transaksi setor atau tarik saldo siswa.
+    </p>
+
+    <div class="card">
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <label>Pilih Siswa</label>
+
+            <select name="siswa_id" required>
+
+                <option value="">
+                    -- Pilih Siswa --
+                </option>
+
+                {% for siswa in siswa_list %}
+
+                    <option value="{{ siswa.id }}">
+                        {{ siswa.nama }} - {{ siswa.nis }}
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <label>Jenis Transaksi</label>
+
+            <div class="jenis">
+
+                <button
+                    type="button"
+                    id="btnSetor"
+                    class="active"
+                    onclick="pilihJenis('setor')">
+
+                    💰 Setor
+
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnTarik"
+                    onclick="pilihJenis('tarik')">
+
+                    💸 Tarik
+
+                </button>
+
+            </div>
+
+
+            <input
+                type="hidden"
+                name="jenis"
+                id="jenis"
+                value="setor">
+
+
+            <label>Nominal</label>
+
+            <input
+                type="number"
+                name="nominal"
+                min="1"
+                placeholder="Masukkan nominal"
+                required>
+
+
+            <label>Keterangan</label>
+
+            <input
+                type="text"
+                name="keterangan"
+                placeholder="Contoh: Setoran mingguan">
+
+
+            <button type="submit" class="btn">
+                Simpan Transaksi
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function pilihJenis(jenis) {
+
+    document.getElementById("jenis").value = jenis;
+
+    document
+        .getElementById("btnSetor")
+        .classList.remove("active");
+
+    document
+        .getElementById("btnTarik")
+        .classList.remove("active");
+
+
+    if (jenis === "setor") {
+
+        document
+            .getElementById("btnSetor")
+            .classList.add("active");
+
+    } else {
+
+        document
+            .getElementById("btnTarik")
+            .classList.add("active");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

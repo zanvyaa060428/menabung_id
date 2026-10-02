@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Kelas - Menabung.Id</title>
+
+    <style>
+
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
+
+        body{
+            font-family:Arial,sans-serif;
+            background:#f5faf7;
+            color:#1f2d26;
+            padding-bottom:40px;
+        }
+
+        .header{
+            background:#ffffff;
+            border-bottom:1px solid #e2eee7;
+            padding:15px;
+        }
+
+        .header-left{
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+
+        .back-btn{
+            width:38px;
+            height:38px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:#eaf7ef;
+            color:#278451;
+            border-radius:12px;
+            text-decoration:none;
+            font-size:25px;
+        }
+
+        .brand{
+            font-size:16px;
+            font-weight:800;
+            color:#278451;
+        }
+
+        .header-title{
+            font-size:11px;
+            color:#8b9b92;
+            margin-top:2px;
+        }
+
+        .container{
+            width:100%;
+            max-width:600px;
+            margin:auto;
+            padding:22px 15px;
+        }
+
+        .page-title{
+            font-size:24px;
+            font-weight:800;
+        }
+
+        .page-subtitle{
+            margin-top:6px;
+            color:#8a9991;
+            font-size:13px;
+        }
+
+              .form-card{
+            margin-top:20px;
+            background:#ffffff;
+            border:1px solid #e1eee6;
+            border-radius:20px;
+            padding:20px;
+            box-shadow:0 8px 25px rgba(45,108,73,.05);
+        }
+
+        .form-group{
+            margin-bottom:16px;
+        }
+
+        .form-label{
+            display:block;
+            margin-bottom:7px;
+            font-size:12px;
+            font-weight:700;
+            color:#3f5649;
+        }
+
+        .form-input{
+            width:100%;
+            height:45px;
+            padding:0 13px;
+            border:1px solid #dce9e1;
+            border-radius:12px;
+            outline:none;
+            background:#fbfdfc;
+            color:#26382e;
+            font-size:13px;
+        }
+
+        .form-input:focus{
+            border-color:#2d965b;
+            background:#ffffff;
+        }
+
+        .button-group{
+            display:flex;
+            gap:10px;
+            margin-top:22px;
+        }
+
+        .btn{
+            flex:1;
+            height:46px;
+            border-radius:13px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-decoration:none;
+            font-size:13px;
+            font-weight:700;
+            cursor:pointer;
+        }
+
+        .btn-cancel{
+            background:#eef5f1;
+            color:#5e7568;
+            border:1px solid #dce9e1;
+        }
+
+        .btn-save{
+            background:#2d965b;
+            color:#ffffff;
+            border:1px solid #2d965b;
+        }
+
+        .btn:active{
+            transform:scale(.98);
+        }
+
+              @media(max-width:500px){
+
+            .container{
+                padding-left:13px;
+                padding-right:13px;
+            }
+
+            .form-card{
+                padding:17px;
+                border-radius:18px;
+            }
+
+            .button-group{
+                flex-direction:column-reverse;
+            }
+
+            .btn{
+                width:100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<header class="header">
+
+    <div class="header-left">
+
+        <a
+            href="{% url 'data_kelas' %}"
+            class="back-btn">
+            ‹
+        </a>
+
+        <div>
+
+            <div class="brand">
+                Menabung.Id
+            </div>
+
+            <div class="header-title">
+                Admin • Edit Kelas
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+  <main class="container">
+
+    <h1 class="page-title">
+        Edit Kelas
+    </h1>
+
+    <p class="page-subtitle">
+        Ubah informasi kelas yang dipilih.
+    </p>
+
+
+    <form
+        method="post"
+        class="form-card">
+
+        {% csrf_token %}
+
+
+        <div class="form-group">
+
+            <label
+                for="nama_kelas"
+                class="form-label">
+                Nama Kelas
+            </label>
+
+            <input
+                type="text"
+                id="nama_kelas"
+                name="nama_kelas"
+                class="form-input"
+                value="{{ kelas.nama_kelas|default:'' }}"
+                placeholder="Contoh: X RPL 1"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label
+                for="tingkat"
+                class="form-label">
+                Tingkat
+            </label>
+
+            <input
+                type="text"
+                id="tingkat"
+                name="tingkat"
+                class="form-input"
+                value="{{ kelas.tingkat|default:'' }}"
+                placeholder="Contoh: X">
+
+        </div>
+
+              <div class="button-group">
+
+            <a
+                href="{% url 'data_kelas' %}"
+                class="btn btn-cancel">
+                Batal
+            </a>
+
+
+            <button
+                type="submit"
+                class="btn btn-save">
+                💾 Simpan Perubahan
+            </button>
+
+        </div>
+
+    </form>
+
+  </main>
+
+  </body>
+</html>

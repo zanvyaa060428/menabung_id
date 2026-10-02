@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Riwayat Transaksi - Menabung.Id</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #16834b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        h2 {
+            color: #16834b;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 16px;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+        }
+
+        .nama {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .detail {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .nominal {
+            font-size: 17px;
+            font-weight: bold;
+            color: #16834b;
+        }
+
+        .tarik {
+            color: #d9534f;
+        }
+
+        .kosong {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="{% url 'admin_dashboard' %}" class="back">
+        ← Kembali
+    </a>
+
+    <h2>📜 Riwayat Transaksi</h2>
+
+    <p class="subtitle">
+        Daftar transaksi tabungan siswa.
+    </p>
+
+    {% for transaksi in transaksi_list %}
+
+        <div class="card">
+
+            <div class="nama">
+                {{ transaksi.nama_siswa }}
+            </div>
+
+            <div class="detail">
+                {{ transaksi.tanggal|date:"d M Y H:i" }}
+            </div>
+
+            <div class="detail">
+                {{ transaksi.keterangan|default:"-" }}
+            </div>
+
+            {% if transaksi.jenis == "setor" %}
+                <div class="nominal">
+                    + Rp {{ transaksi.nominal|floatformat:0 }}
+                </div>
+            {% else %}
+                <div class="nominal tarik">
+                    - Rp {{ transaksi.nominal|floatformat:0 }}
+                </div>
+            {% endif %}
+
+        </div>
+
+    {% empty %}
+
+        <div class="kosong">
+            Belum ada transaksi.
+        </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

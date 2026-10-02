@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard Siswa - Menabung.Id</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8f6;
+            color: #222;
+            padding-bottom: 80px;
+        }
+
+        .topbar {
+            background: #16834b;
+            color: white;
+            padding: 18px 20px;
+        }
+
+        .topbar-inner {
+            max-width: 700px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .role {
+            font-size: 12px;
+            background: rgba(255,255,255,.15);
+            padding: 7px 11px;
+            border-radius: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 22px 18px;
+        }
+
+        .greeting {
+            margin-bottom: 20px;
+        }
+
+        .greeting h2 {
+            color: #173b2b;
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .greeting p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .saldo-card {
+            background: linear-gradient(135deg, #16834b, #20a765);
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(22,131,75,.2);
+            margin-bottom: 18px;
+        }
+
+        .saldo-label {
+            font-size: 13px;
+            opacity: .85;
+            margin-bottom: 8px;
+        }
+
+        .saldo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .saldo-info {
+            font-size: 12px;
+            opacity: .85;
+        }
+
+        .section-title {
+            margin: 24px 0 12px;
+            font-size: 18px;
+            color: #173b2b;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .menu-item {
+            background: white;
+            padding: 18px 15px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #222;
+            box-shadow: 0 4px 18px rgba(0,0,0,.05);
+        }
+
+        .menu-icon {
+            width: 44px;
+            height: 44px;
+            background: #e8f5ee;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .menu-title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .menu-desc {
+            color: #888;
+            font-size: 11px;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 20px;
+            border-radius: 18px;
+            margin-top: 22px;
+            box-shadow: 0 4px 18px rgba(0,0,0,.05);
+        }
+
+        .profile-card h3 {
+            color: #16834b;
+            margin-bottom: 15px;
+        }
+
+        .profile-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 11px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+
+        .profile-row:last-child {
+            border-bottom: none;
+        }
+
+        .profile-row span:first-child {
+            color: #777;
+        }
+
+        .profile-row span:last-child {
+            font-weight: bold;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -5px 20px rgba(0,0,0,.06);
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #888;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .nav-item.active {
+            color: #16834b;
+            font-weight: bold;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <div class="topbar-inner">
+        <div class="brand">Menabung.Id</div>
+        <div class="role">🎓 Siswa</div>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="greeting">
+        <h2>Halo, {{ nama_siswa }} 👋</h2>
+        <p>Selamat datang di tabungan sekolah.</p>
+    </div>
+
+    <div class="saldo-card">
+        <div class="saldo-label">
+            Saldo Saya
+        </div>
+
+        <div class="saldo">
+            Rp {{ saldo|floatformat:0 }}
+        </div>
+
+        <div class="saldo-info">
+            Saldo tabungan kamu saat ini
+        </div>
+    </div>
+
+    <div class="section-title">
+        Menu Saya
+    </div>
+
+    <div class="menu">
+
+    <a href="{% url 'siswa_dashboard' %}" class="menu-item">
+        <div class="menu-icon">💰</div>
+        <div class="menu-title">Saldo</div>
+        <div class="menu-desc">Lihat saldo tabungan</div>
+    </a>
+
+    <a href="{% url 'riwayat_siswa' %}" class="menu-item">
+        <div class="menu-icon">📜</div>
+        <div class="menu-title">Riwayat</div>
+        <div class="menu-desc">Lihat transaksi</div>
+    </a>
+
+    <a href="{% url 'pengumuman_siswa' %}" class="menu-item">
+        <div class="menu-icon">📢</div>
+        <div class="menu-title">Pengumuman</div>
+        <div class="menu-desc">Informasi sekolah</div>
+    </a>
+
+    <a href="{% url 'siswa_dashboard' %}" class="menu-item">
+        <div class="menu-icon">👤</div>
+        <div class="menu-title">Profil</div>
+        <div class="menu-desc">Data akun saya</div>
+    </a>
+
+    </div>
+  
+
+    <div class="profile-card">
+
+        <h3>👤 Data Saya</h3>
+
+        <div class="profile-row">
+            <span>Nama</span>
+            <span>{{ nama_siswa }}</span>
+        </div>
+
+        <div class="profile-row">
+            <span>NIS</span>
+            <span>{{ nis }}</span>
+        </div>
+
+        <div class="profile-row">
+            <span>Kelas</span>
+            <span>{{ nama_kelas }}</span>
+        </div>
+
+    </div>
+
+      <!-- BOTTOM NAVIGATION -->
+    <nav class="bottom-nav">
+
+        <a href="{% url 'siswa_dashboard' %}" class="nav-item active">
+            <div class="nav-icon">🏠</div>
+            Beranda
+        </a>
+
+        <a href="{% url 'riwayat_siswa' %}" class="nav-item">
+            <div class="nav-icon">📜</div>
+            Riwayat
+        </a>
+
+        <a href="{% url 'pengumuman_siswa' %}" class="nav-item">
+    <div class="nav-icon">📢</div>
+    Info
+        </a>
+
+        <a href="{% url 'siswa_dashboard' %}" class="nav-item">
+    <div class="nav-icon">👤</div>
+    Profil
+        </a>
+
+        <a href="{% url 'logout' %}" class="nav-item">
+            <div class="nav-icon">🚪</div>
+            Keluar
+        </a>
+
+    </nav>
+
+</body>
+</html>

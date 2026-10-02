@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Detail Siswa | Menabung.Id</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:#f5fbf7;
+    color:#18392c;
+    min-height:100vh;
+    padding-bottom:30px;
+}
+
+.topbar{
+    height:68px;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 16px;
+
+    background:white;
+
+    border-bottom:1px solid #e3efe7;
+
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.back{
+    width:42px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+
+    background:#eef8f1;
+
+    color:#26794c;
+
+    text-decoration:none;
+
+    font-size:21px;
+
+    margin-right:11px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.brand-icon{
+    width:40px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+
+    background:#dff5e8;
+
+    font-size:20px;
+}
+
+.brand-name{
+    font-size:18px;
+    font-weight:800;
+}
+
+.brand-name span{
+    color:#39a96b;
+}
+
+.main{
+    width:100%;
+    max-width:650px;
+
+    margin:auto;
+
+    padding:22px 16px;
+}
+
+/* PROFILE */
+
+.profile-card{
+    background:white;
+
+    border-radius:22px;
+
+    padding:22px 18px;
+
+    text-align:center;
+
+    border:1px solid #e4eee8;
+
+    box-shadow:
+        0 10px 30px rgba(45,108,73,.07);
+}
+
+.avatar{
+    width:78px;
+    height:78px;
+
+    margin:0 auto 12px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:24px;
+
+    background:#dff5e8;
+
+    color:#278352;
+
+    font-size:26px;
+    font-weight:800;
+}
+
+.name{
+    font-size:21px;
+    font-weight:800;
+}
+
+.nis{
+    margin-top:5px;
+
+    color:#87998f;
+
+    font-size:13px;
+}
+
+/* BALANCE */
+
+.balance-card{
+    margin-top:14px;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    background:#39a96b;
+
+    color:white;
+
+    box-shadow:
+        0 12px 30px rgba(57,169,107,.18);
+}
+
+.balance-label{
+    font-size:12px;
+    opacity:.85;
+}
+
+.balance{
+    margin-top:6px;
+
+    font-size:27px;
+    font-weight:800;
+}
+
+/* INFO */
+
+.section-title{
+    margin:22px 0 11px;
+
+    font-size:16px;
+    font-weight:800;
+}
+
+.info-card{
+    background:white;
+
+    border-radius:18px;
+
+    border:1px solid #e4eee8;
+
+    overflow:hidden;
+}
+
+.info-row{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    gap:15px;
+
+    padding:15px;
+
+    border-bottom:1px solid #edf3ef;
+}
+
+.info-row:last-child{
+    border-bottom:0;
+}
+
+.info-label{
+    color:#899a91;
+    font-size:12px;
+}
+
+.info-value{
+    text-align:right;
+
+    font-size:13px;
+    font-weight:700;
+
+    color:#315443;
+}
+
+/* BUTTON */
+
+.transaction-button{
+    display:block;
+
+    margin-top:18px;
+
+    padding:15px;
+
+    border-radius:16px;
+
+    text-align:center;
+
+    background:#e1f5e9;
+
+    color:#277b4e;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:800;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <a href="{% url 'data_siswa' %}"
+       class="back">
+        ←
+    </a>
+
+    <div class="brand">
+
+        <div class="brand-icon">
+            🎓
+        </div>
+
+        <div class="brand-name">
+            Menabung<span>.Id</span>
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="main">
+
+    <section class="profile-card">
+
+        <div class="avatar">
+            {{ siswa.nama|slice:":2"|upper }}
+        </div>
+
+        <div class="name">
+            {{ siswa.nama }}
+        </div>
+
+        <div class="nis">
+            NIS: {{ siswa.nis|default:"-" }}
+        </div>
+
+    </section>
+
+
+    <section class="balance-card">
+
+        <div class="balance-label">
+            Saldo Tabungan
+        </div>
+
+        <div class="balance">
+            Rp {{ siswa.saldo|floatformat:0 }}
+        </div>
+
+    </section>
+
+
+    <div class="section-title">
+        Informasi Siswa
+    </div>
+
+
+    <section class="info-card">
+
+        <div class="info-row">
+
+            <span class="info-label">
+                Nama
+            </span>
+
+            <span class="info-value">
+                {{ siswa.nama }}
+            </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <span class="info-label">
+                NIS
+            </span>
+
+            <span class="info-value">
+                {{ siswa.nis|default:"-" }}
+            </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <span class="info-label">
+                Kelas
+            </span>
+
+            <span class="info-value">
+                {{ siswa.kelas_id|default:"-" }}
+            </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <span class="info-label">
+                Email
+            </span>
+
+            <span class="info-value">
+                {{ siswa.email|default:"-" }}
+            </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <span class="info-label">
+                No. HP
+            </span>
+
+            <span class="info-value">
+                {{ siswa.no_hp|default:"-" }}
+            </span>
+
+        </div>
+
+
+        <div class="info-row">
+
+            <span class="info-label">
+                Alamat
+            </span>
+
+            <span class="info-value">
+                {{ siswa.alamat|default:"-" }}
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <a href="#riwayat"
+   class="transaction-button">
+
+    💰 Lihat Riwayat Transaksi
+
+    </a>
+
+  <div id="riwayat" style="margin-top:25px;">
+
+    <h3>📜 Riwayat Transaksi</h3>
+
+    {% for item in transaksi_list %}
+
+    <div style="
+        background:white;
+        padding:15px;
+        margin-top:10px;
+        border-radius:12px;
+        box-shadow:0 3px 10px rgba(0,0,0,.05);
+    ">
+
+        <strong>
+            {% if item.jenis == "setor" %}
+                🟢 Setoran
+            {% else %}
+                🔴 Penarikan
+            {% endif %}
+        </strong>
+
+        <div style="margin-top:5px;">
+            Rp {{ item.nominal|floatformat:0 }}
+        </div>
+
+        {% if item.keterangan %}
+            <small>Keterangan: {{ item.keterangan }}</small><br>
+        {% endif %}
+
+        <small>
+            Tanggal:
+            {{ item.tanggal|date:"d M Y H:i" }}
+        </small>
+
+    </div>
+
+    {% empty %}
+
+    <div style="
+        background:white;
+        padding:20px;
+        margin-top:10px;
+        border-radius:12px;
+        color:#777;
+    ">
+        Belum ada transaksi.
+    </div>
+
+    {% endfor %}
+
+  </>
+
+</main>
+
+</body>
+
+</html>

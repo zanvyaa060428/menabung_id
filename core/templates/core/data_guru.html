@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Data Guru - Menabung.Id</title>
+
+    <style>
+
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
+
+        body{
+            font-family:Arial,sans-serif;
+            background:#f5faf7;
+            color:#1f2d26;
+            padding-bottom:80px;
+        }
+
+        .header{
+            background:#ffffff;
+            border-bottom:1px solid #e2eee7;
+            padding:15px;
+            position:sticky;
+            top:0;
+            z-index:10;
+        }
+
+        .header-left{
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+
+        .back-btn{
+            width:38px;
+            height:38px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:#eaf7ef;
+            color:#278451;
+            border-radius:12px;
+            text-decoration:none;
+            font-size:25px;
+        }
+
+        .brand{
+            font-size:16px;
+            font-weight:800;
+            color:#278451;
+        }
+
+        .header-title{
+            font-size:11px;
+            color:#8b9b92;
+            margin-top:2px;
+        }
+
+        .container{
+            width:100%;
+            max-width:700px;
+            margin:auto;
+            padding:20px 15px;
+        }
+
+        .page-title{
+            font-size:24px;
+            font-weight:800;
+        }
+
+        .page-subtitle{
+            margin-top:5px;
+            color:#8a9991;
+            font-size:13px;
+        }
+
+        .top-actions{
+            margin-top:18px;
+            display:flex;
+            gap:10px;
+        }
+
+        .search-box{
+            flex:1;
+            height:46px;
+            background:#ffffff;
+            border:1px solid #deebe3;
+            border-radius:14px;
+            display:flex;
+            align-items:center;
+            padding:0 13px;
+        }
+
+        .search-box span{
+            margin-right:8px;
+        }
+
+        .search-box input{
+            width:100%;
+            border:0;
+            outline:none;
+            font-size:13px;
+            background:transparent;
+        }
+
+              .add-btn{
+            height:46px;
+            padding:0 16px;
+            background:#2d965b;
+            color:white;
+            border:0;
+            border-radius:14px;
+            text-decoration:none;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:13px;
+            font-weight:700;
+            white-space:nowrap;
+        }
+
+        .summary{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:10px;
+            margin-top:18px;
+        }
+
+        .summary-card{
+            background:white;
+            border:1px solid #e1eee6;
+            border-radius:16px;
+            padding:15px;
+        }
+
+        .summary-label{
+            font-size:11px;
+            color:#91a097;
+        }
+
+        .summary-value{
+            margin-top:5px;
+            font-size:21px;
+            font-weight:800;
+            color:#278451;
+        }
+
+        .guru-list{
+            margin-top:18px;
+            display:flex;
+            flex-direction:column;
+            gap:12px;
+        }
+
+        .guru-card{
+            background:#ffffff;
+            border:1px solid #e1eee6;
+            border-radius:18px;
+            padding:15px;
+            display:grid;
+            grid-template-columns:48px minmax(0,1fr) auto;
+            gap:12px;
+            align-items:center;
+            box-shadow:0 7px 22px rgba(45,108,73,.05);
+        }
+
+        .avatar{
+            width:48px;
+            height:48px;
+            border-radius:15px;
+            background:#e0f5e8;
+            color:#278451;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:15px;
+            font-weight:800;
+        }
+
+        .guru-info{
+            min-width:0;
+        }
+
+        .guru-name{
+            font-size:14px;
+            font-weight:800;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+
+        .guru-nip{
+            margin-top:5px;
+            font-size:11px;
+            color:#91a097;
+        }
+
+        .guru-contact{
+            margin-top:3px;
+            font-size:11px;
+            color:#7d8e84;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+
+            .actions{
+            display:flex;
+            gap:6px;
+        }
+
+        .action-btn{
+            width:34px;
+            height:34px;
+            border-radius:10px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-decoration:none;
+            font-size:15px;
+        }
+
+        .edit{
+            background:#eef7f1;
+            color:#278451;
+        }
+
+        .delete{
+            background:#fff0f0;
+            color:#d95353;
+        }
+
+        .empty-card{
+            background:white;
+            border:1px solid #e1eee6;
+            border-radius:18px;
+            padding:35px 20px;
+            text-align:center;
+            color:#8a9991;
+            font-size:13px;
+        }
+
+        .bottom-nav{
+            position:fixed;
+            left:0;
+            right:0;
+            bottom:0;
+            height:68px;
+            background:#ffffff;
+            border-top:1px solid #e1eee6;
+            display:flex;
+            align-items:center;
+            justify-content:space-around;
+            z-index:20;
+        }
+
+        .nav-item{
+            text-decoration:none;
+            color:#91a097;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:4px;
+            font-size:10px;
+        }
+
+        .nav-item span{
+            font-size:19px;
+        }
+
+        .nav-item.active{
+            color:#2d965b;
+        }
+
+        @media(max-width:500px){
+
+            .top-actions{
+                flex-direction:column;
+            }
+
+            .add-btn{
+                width:100%;
+            }
+
+            .guru-card{
+                grid-template-columns:44px minmax(0,1fr);
+            }
+
+            .avatar{
+                width:44px;
+                height:44px;
+            }
+
+            .actions{
+                grid-column:2;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+  <header class="header">
+
+    <div class="header-left">
+
+        <a
+            href="{% url 'admin_dashboard' %}"
+            class="back-btn">
+            ‹
+        </a>
+
+        <div>
+
+            <div class="brand">
+                Menabung.Id
+            </div>
+
+            <div class="header-title">
+                Admin • Data Guru
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <h1 class="page-title">
+        Data Guru
+    </h1>
+
+    <p class="page-subtitle">
+        Kelola data guru atau petugas tabungan sekolah.
+    </p>
+
+
+    <div class="top-actions">
+
+        <form
+            method="get"
+            class="search-box">
+
+            <span>🔎</span>
+
+            <input
+                type="text"
+                name="q"
+                value="{{ keyword }}"
+                placeholder="Cari nama atau NIP...">
+
+        </form>
+
+
+        <a
+            href="{% url 'tambah_guru' %}"
+            class="add-btn">
+
+            + Tambah Guru
+
+        </a>
+
+    </div>
+
+
+    <section class="summary">
+
+        <div class="summary-card">
+
+            <div class="summary-label">
+                Total Guru
+            </div>
+
+            <div class="summary-value">
+                {{ guru|length }}
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-label">
+                Data Aktif
+            </div>
+
+            <div class="summary-value">
+                {{ guru|length }}
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="guru-list">
+
+        {% for data in guru %}
+
+        <div class="guru-card">
+
+            <div class="avatar">
+                {{ data.nama|slice:":2"|upper }}
+            </div>
+
+
+            <div class="guru-info">
+
+                <div class="guru-name">
+                    {{ data.nama }}
+                </div>
+
+                <div class="guru-nip">
+                    NIP: {{ data.nip|default:"-" }}
+                </div>
+
+                <div class="guru-contact">
+
+                    {% if data.email %}
+                        {{ data.email }}
+                    {% else %}
+                        Email belum diisi
+                    {% endif %}
+
+                    {% if data.no_hp %}
+                        • {{ data.no_hp }}
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <a
+                    href="{% url 'edit_guru' data.id %}"
+                    class="action-btn edit"
+                    title="Edit">
+
+                    ✏️
+
+                </a>
+
+                <a
+                    href="{% url 'hapus_guru' data.id %}"
+                    class="action-btn delete"
+                    title="Hapus">
+
+                    🗑️
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-card">
+
+            👤
+
+            <br><br>
+
+            Belum ada data guru.
+
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+</main>
+
+  <nav class="bottom-nav">
+
+    <a
+        href="{% url 'admin_dashboard' %}"
+        class="nav-item">
+
+        <span>⌂</span>
+        Beranda
+
+    </a>
+
+
+    <a
+        href="{% url 'data_siswa' %}"
+        class="nav-item">
+
+        <span>👥</span>
+        Siswa
+
+    </a>
+
+
+    <a
+        href="{% url 'data_guru' %}"
+        class="nav-item active">
+
+        <span>👨‍🏫</span>
+        Guru
+
+    </a>
+
+
+    <a
+        href="#"
+        class="nav-item">
+
+        <span>💰</span>
+        Transaksi
+
+    </a>
+
+
+    <a
+        href="{% url 'logout' %}"
+        class="nav-item">
+
+        <span>↪</span>
+        Keluar
+
+    </a>
+
+  </nav>
+
+  <script>
+
+    const searchInput =
+        document.querySelector("#searchInput");
+
+    const guruCards =
+        document.querySelectorAll(".guru-card");
+
+
+    if(searchInput){
+
+        searchInput.addEventListener(
+            "input",
+            function(){
+
+                const keyword =
+                    this.value.toLowerCase().trim();
+
+                guruCards.forEach(
+                    function(card){
+
+                        const name =
+                            card.querySelector(
+                                ".guru-name"
+                            ).textContent.toLowerCase();
+
+                        const nip =
+                            card.querySelector(
+                                ".guru-nip"
+                            ).textContent.toLowerCase();
+
+                        if(
+                            name.includes(keyword) ||
+                            nip.includes(keyword)
+                        ){
+
+                            card.style.display =
+                                "grid";
+
+                        }else{
+
+                            card.style.display =
+                                "none";
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    }
+
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function(){
+
+            const cards =
+                document.querySelectorAll(
+                    ".guru-card, .summary-card"
+                );
+
+            cards.forEach(
+                function(card,index){
+
+                    card.style.opacity = "0";
+
+                    card.style.transform =
+                        "translateY(10px)";
+
+                    setTimeout(
+                        function(){
+
+                            card.style.transition =
+                                "all .35s ease";
+
+                            card.style.opacity = "1";
+
+                            card.style.transform =
+                                "translateY(0)";
+
+                        },
+                        index * 70
+                    );
+
+                }
+            );
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

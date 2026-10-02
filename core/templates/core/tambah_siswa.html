@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Tambah Siswa - Menabung.Id</title>
+
+    <style>
+
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
+
+        body{
+            font-family:Arial,sans-serif;
+            background:#f5faf7;
+            color:#1f2d26;
+            padding-bottom:40px;
+        }
+
+        .header{
+            background:#ffffff;
+            border-bottom:1px solid #e2eee7;
+            padding:15px;
+        }
+
+        .header-left{
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+
+        .back-btn{
+            width:38px;
+            height:38px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:#eaf7ef;
+            color:#278451;
+            border-radius:12px;
+            text-decoration:none;
+            font-size:25px;
+        }
+
+        .brand{
+            font-size:16px;
+            font-weight:800;
+            color:#278451;
+        }
+
+        .header-title{
+            font-size:11px;
+            color:#8b9b92;
+            margin-top:2px;
+        }
+
+        .container{
+            width:100%;
+            max-width:600px;
+            margin:auto;
+            padding:22px 15px;
+        }
+
+        .page-title{
+            font-size:24px;
+            font-weight:800;
+        }
+
+        .page-subtitle{
+            margin-top:6px;
+            color:#8a9991;
+            font-size:13px;
+        }
+
+        .form-card{
+            margin-top:20px;
+            background:#ffffff;
+            border:1px solid #e1eee6;
+            border-radius:20px;
+            padding:20px;
+            box-shadow:0 8px 25px rgba(45,108,73,.05);
+        }
+
+        .form-group{
+            margin-bottom:17px;
+        }
+
+        .form-label{
+            display:block;
+            margin-bottom:7px;
+            font-size:13px;
+            font-weight:700;
+            color:#405248;
+        }
+
+        .form-input{
+            width:100%;
+            height:46px;
+            padding:0 13px;
+            border:1px solid #dce9e1;
+            border-radius:12px;
+            outline:none;
+            font-size:13px;
+            color:#26382e;
+            background:#fbfdfc;
+        }
+
+        .form-input:focus{
+            border-color:#5bb783;
+            box-shadow:0 0 0 3px rgba(91,183,131,.10);
+        }
+
+        select.form-input{
+            cursor:pointer;
+        }
+
+        .button-group{
+            display:flex;
+            gap:10px;
+            margin-top:22px;
+        }
+
+        .btn{
+            flex:1;
+            height:46px;
+            border-radius:13px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-decoration:none;
+            font-size:13px;
+            font-weight:700;
+            cursor:pointer;
+        }
+
+        .btn-cancel{
+            background:#eef5f1;
+            color:#5e7568;
+            border:1px solid #dce9e1;
+        }
+
+        .btn-save{
+            background:#278451;
+            color:#ffffff;
+            border:1px solid #278451;
+        }
+
+        .btn:active{
+            transform:scale(.98);
+        }
+
+        @media(max-width:500px){
+
+            .container{
+                padding-left:13px;
+                padding-right:13px;
+            }
+
+            .form-card{
+                padding:17px;
+                border-radius:18px;
+            }
+
+            .button-group{
+                flex-direction:column-reverse;
+            }
+
+            .btn{
+                width:100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="header-left">
+
+        <a
+            href="{% url 'data_siswa' %}"
+            class="back-btn">
+            ‹
+        </a>
+
+        <div>
+
+            <div class="brand">
+                Menabung.Id
+            </div>
+
+            <div class="header-title">
+                Admin • Tambah Siswa
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+  <main class="container">
+
+    <h1 class="page-title">
+        Tambah Siswa
+    </h1>
+
+    <p class="page-subtitle">
+        Tambahkan data siswa baru ke sistem.
+    </p>
+
+
+    <form
+        method="post"
+        class="form-card">
+
+        {% csrf_token %}
+
+
+        <div class="form-group">
+
+            <label
+                for="nis"
+                class="form-label">
+                NIS
+            </label>
+
+            <input
+                type="text"
+                id="nis"
+                name="nis"
+                class="form-input"
+                placeholder="Contoh: 2026002"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label
+                for="nama"
+                class="form-label">
+                Nama Siswa
+            </label>
+
+            <input
+                type="text"
+                id="nama"
+                name="nama"
+                class="form-input"
+                placeholder="Masukkan nama siswa"
+                required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label
+                for="kelas_id"
+                class="form-label">
+                Kelas
+            </label>
+
+            <select
+                id="kelas_id"
+                name="kelas_id"
+                class="form-input"
+                required>
+
+                <option value="">
+                    Pilih Kelas
+                </option>
+
+                {% for k in kelas %}
+
+                    <option value="{{ k.id }}">
+                        {{ k.nama_kelas }}
+                    </option>
+
+                {% empty %}
+
+                    <option value="">
+                        Belum ada data kelas
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+              <div class="form-group">
+
+            <label
+                for="saldo"
+                class="form-label">
+                Saldo Awal
+            </label>
+
+            <input
+                type="number"
+                id="saldo"
+                name="saldo"
+                class="form-input"
+                value="0"
+                min="0"
+                placeholder="Masukkan saldo awal">
+
+        </div>
+
+
+        <div class="button-group">
+
+            <a
+                href="{% url 'data_siswa' %}"
+                class="btn btn-cancel">
+                Batal
+            </a>
+
+            <button
+                type="submit"
+                class="btn btn-save">
+                💾 Simpan Siswa
+            </button>
+
+        </div>
+
+    </form>
+
+  </main>
+
+  <script>
+
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function(){
+
+        const button = document.querySelector(".btn-save");
+
+        button.innerHTML = "⏳ Menyimpan...";
+
+        button.disabled = true;
+
+    });
+
+  </script>
+
+  <script>
+
+    const saldoInput = document.getElementById("saldo");
+
+    saldoInput.addEventListener("input", function(){
+
+        if (this.value < 0) {
+            this.value = 0;
+        }
+
+    });
+
+  </script>
+
+  </body>
+</html>
+  

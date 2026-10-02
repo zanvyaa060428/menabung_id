@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Data Siswa - Menabung.Id</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f3faf6;
+    color:#24352c;
+    min-height:100vh;
+}
+
+.header{
+    background:#ffffff;
+    padding:18px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #e3eee7;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.back-btn{
+    width:38px;
+    height:38px;
+    border-radius:12px;
+    background:#eaf7ef;
+    color:#278451;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-size:20px;
+}
+
+.brand{
+    font-size:17px;
+    font-weight:800;
+    color:#247b4b;
+}
+
+.header-title{
+    font-size:12px;
+    color:#91a097;
+    margin-top:2px;
+}
+
+.container{
+    width:100%;
+    max-width:700px;
+    margin:auto;
+    padding:20px 16px 90px;
+}
+
+.page-title{
+    font-size:24px;
+    font-weight:800;
+    margin-bottom:5px;
+}
+
+.page-subtitle{
+    font-size:13px;
+    color:#8a9a91;
+    margin-bottom:20px;
+}
+
+/* SEARCH */
+
+.search-box{
+    width:100%;
+    background:#ffffff;
+    border:1px solid #e2eee7;
+    border-radius:16px;
+    padding:13px 15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.search-icon{
+    font-size:17px;
+    color:#82a18e;
+}
+
+.search-box input{
+    width:100%;
+    border:0;
+    outline:0;
+    font-size:14px;
+    background:transparent;
+    color:#24352c;
+}
+
+  /* FILTER */
+
+.filter-wrapper{
+    width:100%;
+    overflow-x:auto;
+    margin-bottom:18px;
+    scrollbar-width:none;
+}
+
+.filter-wrapper::-webkit-scrollbar{
+    display:none;
+}
+
+.filter-buttons{
+    display:flex;
+    gap:8px;
+    width:max-content;
+}
+
+.filter-btn{
+    border:1px solid #dcebe2;
+    background:#ffffff;
+    color:#668074;
+    padding:9px 15px;
+    border-radius:12px;
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.filter-btn.active{
+    background:#2d965b;
+    border-color:#2d965b;
+    color:#ffffff;
+}
+
+
+/* SUMMARY */
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.summary-card{
+    background:#ffffff;
+    border:1px solid #e2eee7;
+    border-radius:16px;
+    padding:15px;
+}
+
+.summary-label{
+    font-size:11px;
+    color:#91a097;
+    margin-bottom:5px;
+}
+
+.summary-value{
+    font-size:20px;
+    font-weight:800;
+    color:#267f4e;
+}
+
+
+/* STUDENT LIST */
+
+.student-list{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.student-card{
+    width:100%;
+    min-height:82px;
+
+    display:grid;
+
+    grid-template-columns:
+        48px
+        minmax(0,1fr)
+        95px
+        34px;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:14px;
+
+    background:#ffffff;
+
+    border:1px solid #e4eee8;
+
+    border-radius:18px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(45,108,73,.055);
+
+    overflow:hidden;
+}
+
+.avatar{
+    width:48px;
+    height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:15px;
+
+    background:#e0f5e8;
+    color:#25804e;
+
+    font-size:15px;
+    font-weight:800;
+
+    overflow:hidden;
+}
+
+.student-info{
+    width:100%;
+    min-width:0;
+    overflow:hidden;
+}
+
+.student-name{
+    width:100%;
+
+    font-size:14px;
+    font-weight:800;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.student-meta{
+    width:100%;
+
+    display:flex;
+    align-items:center;
+
+    gap:6px;
+
+    margin-top:5px;
+
+    min-width:0;
+    overflow:hidden;
+  }
+
+  .student-class{
+    display:block;
+
+    max-width:85px;
+
+    padding:3px 7px;
+
+    background:#f0f8f3;
+
+    border-radius:7px;
+
+    color:#4d7760;
+
+    font-size:11px;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.student-nis{
+    display:block;
+
+    max-width:65px;
+
+    color:#91a097;
+
+    font-size:11px;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.student-balance{
+    width:95px;
+
+    min-width:0;
+
+    text-align:right;
+
+    overflow:hidden;
+}
+
+.balance-label{
+    font-size:9px;
+
+    color:#9aa9a1;
+
+    margin-bottom:2px;
+}
+
+.balance-value{
+    font-size:12px;
+
+    font-weight:800;
+
+    color:#269456;
+
+    white-space:nowrap;
+}
+
+.student-action{
+    width:34px;
+    height:34px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:0;
+
+    border-radius:10px;
+
+    background:#f0f8f3;
+
+    color:#438261;
+
+    font-size:18px;
+
+    text-decoration:none;
+
+    flex-shrink:0;
+}
+
+.empty-card{
+    width:100%;
+
+    padding:30px 20px;
+
+    text-align:center;
+
+    background:#ffffff;
+
+    border:1px solid #e4eee8;
+
+    border-radius:18px;
+
+    color:#8a9b92;
+
+    font-size:13px;
+}
+
+
+/* BOTTOM NAV */
+
+.bottom-nav{
+    position:fixed;
+
+    bottom:0;
+    left:0;
+    right:0;
+
+    height:68px;
+
+    background:#ffffff;
+
+    border-top:1px solid #e4eee8;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+
+    z-index:20;
+}
+
+.nav-item{
+    text-decoration:none;
+
+    color:#91a097;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    gap:4px;
+
+    font-size:10px;
+}
+
+.nav-item span{
+    font-size:20px;
+}
+
+.nav-item.active{
+    color:#2d965b;
+}
+
+
+/* MOBILE */
+
+@media(max-width:420px){
+
+    .container{
+        padding-left:13px;
+        padding-right:13px;
+    }
+
+    .student-card{
+        grid-template-columns:
+            44px
+            minmax(0,1fr)
+            82px
+            32px;
+
+        gap:8px;
+
+        padding:12px;
+    }
+
+    .avatar{
+        width:44px;
+        height:44px;
+    }
+
+    .student-balance{
+        width:82px;
+    }
+
+    .balance-value{
+        font-size:11px;
+    }
+
+    .student-action{
+        width:32px;
+        height:32px;
+    }
+
+}
+
+.student-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.edit-action {
+    background: #ecfdf5;
+    color: #15803d;
+    padding: 8px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+  .delete-action {
+    background: #fef2f2;
+    color: #dc2626;
+    padding: 8px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  
+</style>
+
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+<header class="header">
+
+    <div class="header-left">
+
+        <a href="{% url 'admin_dashboard' %}"
+           class="back-btn">
+            ‹
+        </a>
+
+        <div>
+
+            <div class="brand">
+                Menabung.Id
+            </div>
+
+            <div class="header-title">
+                Data Siswa
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- CONTENT -->
+
+<main class="container">
+
+    <h1 class="page-title">
+        Data Siswa
+    </h1>
+
+<a
+    href="{% url 'tambah_siswa' %}"
+    class="add-btn">
+    + Tambah Siswa
+</a>
+
+    <p class="page-subtitle">
+        Kelola dan lihat informasi seluruh siswa.
+    </p>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <div class="search-icon">
+            🔎
+        </div>
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Cari nama atau NIS..."
+        >
+
+    </div>
+
+
+    <!-- FILTER -->
+
+    <div class="filter-wrapper">
+
+        <div class="filter-buttons">
+
+            <button
+                type="button"
+                class="filter-btn active"
+                data-filter="semua">
+                Semua
+            </button>
+
+            <button
+                type="button"
+                class="filter-btn"
+                data-filter="X RPL">
+                X RPL
+            </button>
+
+            <button
+                type="button"
+                class="filter-btn"
+                data-filter="XI RPL">
+                XI RPL
+            </button>
+
+            <button
+                type="button"
+                class="filter-btn"
+                data-filter="XII RPL">
+                XII RPL
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SUMMARY -->
+
+    <section class="summary">
+
+        <div class="summary-card">
+
+            <div class="summary-label">
+                Total Siswa
+            </div>
+
+            <div class="summary-value">
+                {{ siswa|length }}
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-label">
+                Data Aktif
+            </div>
+
+            <div class="summary-value">
+                {{ siswa|length }}
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STUDENT LIST -->
+
+    <section
+        class="student-list"
+        id="studentList">
+
+      {% for data in siswa %}
+
+<div
+    class="student-card"
+    data-kelas="{{ data.kelas_id }}"
+    data-search="{{ data.nama }} {{ data.nis|default:'' }}"
+>
+
+    <!-- AVATAR -->
+    <div class="avatar">
+        {{ data.nama|slice:":2"|upper }}
+    </div>
+
+
+    <!-- INFO -->
+    <div class="student-info">
+
+        <div class="student-name">
+            {{ data.nama }}
+        </div>
+
+        <div class="student-meta">
+
+            <span class="student-class">
+
+                {% for k in kelas %}
+
+                    {% if k.id == data.kelas_id %}
+                        {{ k.nama_kelas }}
+                    {% endif %}
+
+                {% endfor %}
+
+                {% if not data.kelas_id %}
+                    -
+                {% endif %}
+
+            </span>
+
+            <span class="student-nis">
+                {{ data.nis|default:"-" }}
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- SALDO -->
+    <div class="student-balance">
+
+        <div class="balance-label">
+            Saldo
+        </div>
+
+        <div class="balance-value">
+            Rp {{ data.saldo|floatformat:0 }}
+        </div>
+
+    </div>
+
+
+    <!-- AKSI -->
+    <div class="student-actions">
+
+        <a
+            href="{% url 'detail_siswa' data.id %}"
+            class="student-action">
+            Lihat
+        </a>
+
+        <a
+            href="{% url 'edit_siswa' data.id %}"
+            class="student-action edit-action">
+            Edit
+        </a>
+
+        <a
+            href="{% url 'hapus_siswa' data.id %}"
+            class="student-action delete-action">
+            Hapus
+        </a>
+
+    </div>
+
+</div>
+
+
+{% empty %}
+
+<div class="empty-card">
+    Belum ada data siswa.
+</div>
+
+{% endfor %}
+
+    </section>
+
+</main>
+
+  <!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+    <a
+        href="{% url 'admin_dashboard' %}"
+        class="nav-item">
+
+        <span>⌂</span>
+        Beranda
+
+    </a>
+
+
+    <a
+        href="{% url 'data_siswa' %}"
+        class="nav-item active">
+
+        <span>👥</span>
+        Siswa
+
+    </a>
+
+
+    <a
+        href="#"
+        class="nav-item">
+
+        <span>💰</span>
+        Transaksi
+
+    </a>
+
+
+    <a
+        href="#"
+        class="nav-item">
+
+        <span>📊</span>
+        Laporan
+
+    </a>
+
+
+    <a
+        href="{% url 'logout' %}"
+        class="nav-item">
+
+        <span>↪</span>
+        Keluar
+
+    </a>
+
+</nav>
+
+  <script>
+
+/* =========================
+   FILTER
+========================= */
+
+const filterButtons =
+    document.querySelectorAll(".filter-btn");
+
+const studentCards =
+    document.querySelectorAll(".student-card");
+
+
+filterButtons.forEach(function(button){
+
+    button.addEventListener("click", function(){
+
+        filterButtons.forEach(function(btn){
+
+            btn.classList.remove("active");
+
+        });
+
+
+        this.classList.add("active");
+
+
+        const filter =
+            this.dataset.filter;
+
+
+        studentCards.forEach(function(card){
+
+            const classText =
+                card.querySelector(".student-class")
+                .textContent
+                .trim();
+
+
+            if(filter === "semua"){
+
+                card.style.display = "grid";
+
+                return;
+
+            }
+
+
+            if(classText === filter){
+
+                card.style.display = "grid";
+
+            }
+
+            else{
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    });
+
+});
+
+
+/* =========================
+   SEARCH
+========================= */
+
+const searchInput =
+    document.getElementById("searchInput");
+
+
+searchInput.addEventListener(
+    "input",
+    function(){
+
+        const keyword =
+            this.value
+            .toLowerCase()
+            .trim();
+
+
+        studentCards.forEach(function(card){
+
+            const searchData =
+                card.dataset.search
+                .toLowerCase();
+
+
+            if(
+                searchData.includes(keyword)
+            ){
+
+                card.style.display = "grid";
+
+            }
+
+            else{
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+    }
+);
+
+
+/* =========================
+   ANIMATION
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        const cards =
+            document.querySelectorAll(
+                ".student-card, .summary-card"
+            );
+
+
+        cards.forEach(
+            function(card,index){
+
+                card.style.opacity = "0";
+
+                card.style.transform =
+                    "translateY(10px)";
+
+
+                setTimeout(
+                    function(){
+
+                        card.style.transition =
+                            "all .35s ease";
+
+                        card.style.opacity =
+                            "1";
+
+                        card.style.transform =
+                            "translateY(0)";
+
+                    },
+                    index * 70
+                );
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

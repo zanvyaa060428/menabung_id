@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pengumuman - Menabung.Id</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8f6;
+            color: #222;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #16834b;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        h2 {
+            color: #173b2b;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .add-button {
+            display: block;
+            background: #16834b;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding: 13px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .card {
+            background: white;
+            padding: 17px;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+        }
+
+        .title {
+            font-weight: bold;
+            color: #173b2b;
+            font-size: 16px;
+        }
+
+        .date {
+            color: #999;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .content {
+            margin-top: 12px;
+            line-height: 1.6;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .empty {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="{% url 'admin_dashboard' %}" class="back">
+        ← Kembali ke Dashboard
+    </a>
+
+    <h2>📢 Pengumuman</h2>
+
+    <p class="subtitle">
+        Kelola pengumuman untuk siswa
+    </p>
+
+    <a href="{% url 'tambah_pengumuman' %}" class="add-button">
+    + Tambah Pengumuman
+    </a>
+
+    {% for item in pengumuman %}
+
+    <div class="card">
+
+        <div class="title">
+            {{ item.judul }}
+        </div>
+
+        <div class="date">
+            {{ item.tanggal|date:"d M Y H:i" }}
+        </div>
+
+        <div class="content">
+            {{ item.isi }}
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="empty">
+        Belum ada pengumuman.
+    </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

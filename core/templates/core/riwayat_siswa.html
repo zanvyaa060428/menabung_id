@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Saya - Menabung.Id</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8f6;
+            color: #222;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .header {
+            margin-bottom: 20px;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #16834b;
+            font-size: 14px;
+        }
+
+        h2 {
+            margin-top: 15px;
+            color: #173b2b;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .transaction {
+            background: white;
+            padding: 17px;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+        }
+
+        .transaction-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .jenis {
+            font-weight: bold;
+        }
+
+        .setor {
+            color: #16834b;
+        }
+
+        .tarik {
+            color: #d64545;
+        }
+
+        .nominal {
+            font-weight: bold;
+        }
+
+        .detail {
+            margin-top: 9px;
+            color: #777;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .empty {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <a href="{% url 'siswa_dashboard' %}" class="back">
+            ← Kembali ke Dashboard
+        </a>
+
+        <h2>📜 Riwayat Transaksi</h2>
+
+        <p class="subtitle">
+            Riwayat tabungan {{ siswa.nama }}
+        </p>
+    </div>
+
+    {% for item in transaksi_list %}
+
+    <div class="transaction">
+
+        <div class="transaction-top">
+
+            <div class="jenis
+                {% if item.jenis == 'setor' %}
+                    setor
+                {% else %}
+                    tarik
+                {% endif %}
+            ">
+                {% if item.jenis == "setor" %}
+                    ↑ Setoran
+                {% else %}
+                    ↓ Penarikan
+                {% endif %}
+            </div>
+
+            <div class="nominal">
+                Rp {{ item.nominal|floatformat:0 }}
+            </div>
+
+        </div>
+
+        <div class="detail">
+
+            {% if item.keterangan %}
+                Keterangan: {{ item.keterangan }}<br>
+            {% endif %}
+
+            Tanggal:
+            {{ item.tanggal|date:"d M Y H:i" }}
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="empty">
+        Belum ada transaksi.
+    </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

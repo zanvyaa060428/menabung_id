@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard Admin | Menabung.Id</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background: #f5fbf7;
+
+            color: #18392c;
+
+            min-height: 100vh;
+
+            padding-bottom: 85px;
+        }
+
+
+        /* =========================
+           TOP BAR
+        ========================== */
+
+        .topbar {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            height: 68px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:
+                0 17px;
+
+            background:
+                rgba(255,255,255,.92);
+
+            backdrop-filter:
+                blur(14px);
+
+            border-bottom:
+                1px solid #e5f0e8;
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .brand-icon {
+
+            width: 40px;
+            height: 40px;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #48bd78,
+                    #24985a
+                );
+
+            font-size: 20px;
+
+            box-shadow:
+                0 7px 18px
+                rgba(38,157,91,.18);
+        }
+
+
+        .brand-name {
+
+            font-size: 19px;
+
+            font-weight: 800;
+
+            letter-spacing: -.5px;
+        }
+
+
+        .brand-name span {
+
+            color: #32a765;
+        }
+
+
+        .menu-button {
+
+            width: 40px;
+            height: 40px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background: #edf8f1;
+
+            color: #278c54;
+
+            font-size: 20px;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================== */
+
+        .main {
+
+            width: 100%;
+
+            max-width: 650px;
+
+            margin: auto;
+
+            padding:
+                22px 16px;
+        }
+
+
+        /* =========================
+           GREETING
+        ========================== */
+
+        .greeting {
+
+            margin-bottom: 20px;
+        }
+
+
+        .greeting-small {
+
+            color: #7d978b;
+
+            font-size: 11px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .greeting h1 {
+
+            font-size: 25px;
+
+            line-height: 1.2;
+
+            letter-spacing: -.7px;
+        }
+
+
+        .greeting h1 span {
+
+            color: #2da563;
+        }
+
+
+        .greeting p {
+
+            margin-top: 6px;
+
+            color: #81988d;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           BALANCE CARD
+        ========================== */
+
+        .balance-card {
+
+            position: relative;
+
+            overflow: hidden;
+
+            min-height: 175px;
+
+            border-radius: 25px;
+
+            padding: 22px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #43b974,
+                    #218f53
+                );
+
+            box-shadow:
+                0 14px 30px
+                rgba(37,151,87,.20);
+
+            margin-bottom: 18px;
+        }
+
+
+        .balance-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 190px;
+            height: 190px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,.10);
+
+            right: -75px;
+
+            top: -95px;
+        }
+
+
+        .balance-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 130px;
+            height: 130px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,.07);
+
+            left: -70px;
+
+            bottom: -80px;
+        }
+
+
+        .balance-label {
+
+            position: relative;
+
+            z-index: 2;
+
+            font-size: 11px;
+
+            opacity: .85;
+
+            margin-bottom: 7px;
+        }
+
+
+        .balance {
+
+            position: relative;
+
+            z-index: 2;
+
+            font-size: 29px;
+
+            font-weight: 800;
+
+            letter-spacing: -.8px;
+        }
+
+
+        .balance-info {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-top: 20px;
+        }
+
+
+        .balance-info span {
+
+            font-size: 10px;
+
+            opacity: .8;
+        }
+
+
+        .balance-date {
+
+            background:
+                rgba(255,255,255,.15);
+
+            padding:
+                6px 10px;
+
+            border-radius: 20px;
+
+            font-size: 9px !important;
+        }
+
+
+        /* =========================
+           STATISTICS
+        ========================== */
+
+        .section-title {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin:
+                24px 2px 12px;
+        }
+
+
+        .section-title h2 {
+
+            font-size: 16px;
+
+            letter-spacing: -.3px;
+        }
+
+
+        .section-title a {
+
+            text-decoration: none;
+
+            color: #31a765;
+
+            font-size: 10px;
+
+            font-weight: 700;
+        }
+
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 11px;
+        }
+
+
+        .stat-card {
+
+            background: white;
+
+            border:
+                1px solid #e7f0ea;
+
+            border-radius: 19px;
+
+            padding: 15px;
+
+            box-shadow:
+                0 6px 18px
+                rgba(45,95,66,.045);
+        }
+
+
+        .stat-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 12px;
+        }
+
+
+        .stat-icon {
+
+            width: 35px;
+            height: 35px;
+
+            border-radius: 11px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #e8f8ee;
+
+            font-size: 17px;
+        }
+
+
+        .stat-arrow {
+
+            color: #73a28a;
+
+            font-size: 16px;
+        }
+
+
+        .stat-value {
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+            color: #1c4835;
+        }
+
+
+        .stat-label {
+
+            margin-top: 3px;
+
+            color: #8ba097;
+
+            font-size: 10px;
+        }
+
+              /* =========================
+           QUICK ACTION
+        ========================== */
+
+        .quick-actions {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 9px;
+        }
+
+
+        .quick-item {
+
+            text-decoration: none;
+
+            background: white;
+
+            border:
+                1px solid #e7f0ea;
+
+            border-radius: 17px;
+
+            padding:
+                13px 5px;
+
+            text-align: center;
+
+            color: #315646;
+
+            box-shadow:
+                0 5px 15px
+                rgba(45,95,66,.04);
+
+            transition: .2s ease;
+        }
+
+
+        .quick-item:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color: #bce5ca;
+
+            box-shadow:
+                0 9px 20px
+                rgba(45,95,66,.08);
+        }
+
+
+        .quick-icon {
+
+            width: 37px;
+            height: 37px;
+
+            margin:
+                0 auto 7px;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #e9f9ef;
+
+            font-size: 17px;
+        }
+
+
+        .quick-item span {
+
+            display: block;
+
+            font-size: 9px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           CHART CARD
+        ========================== */
+
+        .chart-card {
+
+            background: white;
+
+            border:
+                1px solid #e7f0ea;
+
+            border-radius: 21px;
+
+            padding: 17px;
+
+            box-shadow:
+                0 6px 18px
+                rgba(45,95,66,.045);
+        }
+
+
+        .chart-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 18px;
+        }
+
+
+        .chart-title {
+
+            font-size: 14px;
+
+            font-weight: 800;
+        }
+
+
+        .chart-subtitle {
+
+            color: #91a49b;
+
+            font-size: 9px;
+
+            margin-top: 3px;
+        }
+
+
+        .chart-filter {
+
+            border: none;
+
+            background: #edf9f1;
+
+            color: #29965a;
+
+            border-radius: 9px;
+
+            padding: 7px 9px;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            outline: none;
+        }
+
+
+        .chart {
+
+            height: 145px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            justify-content: space-around;
+
+            gap: 8px;
+
+            padding:
+                10px 4px 0;
+
+            border-bottom:
+                1px solid #edf2ee;
+
+            position: relative;
+        }
+
+
+        .chart::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            top: 30px;
+
+            height: 1px;
+
+            background: #f0f4f1;
+
+            box-shadow:
+                0 38px #f0f4f1,
+                0 76px #f0f4f1;
+        }
+
+
+        .bar {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 25px;
+
+            border-radius:
+                7px 7px 2px 2px;
+
+            background:
+                linear-gradient(
+                    to top,
+                    #35aa67,
+                    #8bdaa9
+                );
+
+            min-height: 15px;
+
+            transition:
+                height .5s ease;
+
+            box-shadow:
+                0 4px 9px
+                rgba(45,165,94,.10);
+        }
+
+
+        .bar.active {
+
+            background:
+                linear-gradient(
+                    to top,
+                    #198b4c,
+                    #56c882
+                );
+        }
+
+
+        .chart-labels {
+
+            display: flex;
+
+            justify-content:
+                space-around;
+
+            margin-top: 7px;
+        }
+
+
+        .chart-labels span {
+
+            color: #98aaa1;
+
+            font-size: 8px;
+        }
+
+
+        /* =========================
+           RECENT ACTIVITY
+        ========================== */
+
+        .activity-card {
+
+            background: white;
+
+            border:
+                1px solid #e7f0ea;
+
+            border-radius: 21px;
+
+            padding: 16px;
+
+            box-shadow:
+                0 6px 18px
+                rgba(45,95,66,.045);
+        }
+
+
+        .activity {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            padding:
+                12px 0;
+
+            border-bottom:
+                1px solid #f0f4f1;
+        }
+
+
+        .activity:last-child {
+
+            border-bottom: none;
+
+            padding-bottom: 0;
+        }
+
+
+        .activity:first-child {
+
+            padding-top: 0;
+        }
+
+
+        .activity-icon {
+
+            width: 38px;
+            height: 38px;
+
+            flex-shrink: 0;
+
+            border-radius: 12px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #e8f8ee;
+
+            font-size: 16px;
+        }
+
+
+        .activity-info {
+
+            min-width: 0;
+
+            flex: 1;
+        }
+
+
+        .activity-name {
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            color: #345849;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .activity-time {
+
+            margin-top: 3px;
+
+            color: #9aaba3;
+
+            font-size: 8px;
+        }
+
+
+        .activity-amount {
+
+            text-align: right;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        .deposit {
+
+            color: #299d5b;
+        }
+
+
+        .withdraw {
+
+            color: #df765e;
+        }
+
+
+        /* =========================
+           BOTTOM NAVIGATION
+        ========================== */
+
+        .bottom-nav {
+
+            position: fixed;
+
+            z-index: 200;
+
+            left: 50%;
+
+            bottom: 10px;
+
+            transform:
+                translateX(-50%);
+
+            width:
+                calc(100% - 24px);
+
+            max-width: 620px;
+
+            height: 66px;
+
+            background:
+                rgba(255,255,255,.94);
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
+
+            border:
+                1px solid #e3eee7;
+
+            border-radius: 21px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(30,85,51,.13);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content:
+                space-around;
+
+            padding:
+                5px 4px;
+        }
+
+
+        .nav-item {
+
+            width: 20%;
+
+            height: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 3px;
+
+            text-decoration: none;
+
+            color: #91a39a;
+
+            border-radius: 15px;
+
+            transition: .2s ease;
+        }
+
+
+        .nav-item.active {
+
+            color: #27995a;
+
+            background: #eaf8ef;
+
+        }
+
+
+        .nav-icon {
+
+            font-size: 17px;
+
+            line-height: 1;
+        }
+
+
+        .nav-item span:last-child {
+
+            font-size: 8px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           DESKTOP ADAPTATION
+        ========================== */
+
+        @media (min-width: 700px) {
+
+            .main {
+
+                padding-top: 30px;
+            }
+
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(4, 1fr);
+            }
+
+
+            .quick-actions {
+
+                grid-template-columns:
+                    repeat(4, 1fr);
+            }
+
+
+            .balance {
+
+                font-size: 34px;
+            }
+
+          }
+
+              </style>
+
+    </head>
+
+
+    <body>
+
+
+        <!-- =========================
+             TOP BAR
+        ========================== -->
+
+        <header class="topbar">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    💰
+                </div>
+
+                <div class="brand-name">
+                    Menabung<span>.Id</span>
+                </div>
+
+            </div>
+
+
+            <button
+                class="menu-button"
+                type="button"
+                onclick="showMenu()"
+            >
+                ☰
+            </button>
+
+        </header>
+
+
+        <!-- =========================
+             MAIN CONTENT
+        ========================== -->
+
+        <main class="main">
+
+
+            <!-- GREETING -->
+
+            <section class="greeting">
+
+                <div class="greeting-small">
+                    Selamat pagi 👋
+                </div>
+
+                <h1>
+                    Halo, <span>Admin!</span>
+                </h1>
+
+                <p>
+                    Kelola sistem tabungan sekolah
+                    dengan mudah hari ini.
+                </p>
+
+            </section>
+
+
+            <!-- =========================
+                 BALANCE
+            ========================== -->
+
+            <section class="balance-card">
+
+                <div class="balance-label">
+                    Total Saldo Tabungan Siswa
+                </div>
+
+                <div class="balance">
+                    Rp {{ total_saldo|floatformat:0 }}
+                </div>
+
+                <div class="balance-info">
+
+                    <span>
+                        Saldo seluruh siswa
+                    </span>
+
+                    <span class="balance-date">
+                        📅 Agustus 2026
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 STATISTICS
+            ========================== -->
+
+            <div class="section-title">
+
+                <h2>
+                    Ringkasan
+                </h2>
+
+                <a href="#">
+                    Lihat semua
+                </a>
+
+            </div>
+
+
+            <section class="stats">
+
+
+                <!-- SISWA -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            👨‍🎓
+                        </div>
+
+                        <div class="stat-arrow">
+                            ›
+                        </div>
+
+                    </div>
+
+                    <div class="stat-value">
+                        {{ total_siwa }}
+                    </div>
+
+                    <div class="stat-label">
+                        Total Siswa
+                    </div>
+
+                </div>
+
+
+                <!-- GURU -->
+
+                <a href="{% url 'data_guru' %}" class="stat-card">
+
+    <div class="stat-top">
+
+        <div class="stat-icon">
+            👨‍🏫
+        </div>
+
+        <div class="stat-arrow">
+            ›
+        </div>
+
+    </div>
+
+    <div class="stat-value">
+        12
+    </div>
+
+    <div class="stat-label">
+        Guru / Petugas
+    </div>
+
+                </a>
+
+
+                <!-- SETORAN -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            💵
+                        </div>
+
+                        <div class="stat-arrow">
+                            ›
+                        </div>
+
+                    </div>
+
+                    <div class="stat-value">
+                        Rp 3,2 jt
+                    </div>
+
+                    <div class="stat-label">
+                        Setoran Bulan Ini
+                    </div>
+
+                </div>
+
+
+                <!-- PENARIKAN -->
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            💸
+                        </div>
+
+                        <div class="stat-arrow">
+                            ›
+                        </div>
+
+                    </div>
+
+                    <div class="stat-value">
+                        Rp 850 rb
+                    </div>
+
+                    <div class="stat-label">
+                        Penarikan Bulan Ini
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =========================
+                 QUICK ACTION
+            ========================== -->
+
+            <div class="section-title">
+    <h2>Menu Cepat</h2>
+</div>
+
+<section class="quick-actions">
+
+    <a href="{% url 'data_siswa' %}" class="quick-item">
+        <div class="quick-icon">👨‍🎓</div>
+        <div class="quick-text">Siswa</div>
+    </a>
+
+    <a href="{% url 'data_kelas' %}" class="quick-item">
+        <div class="quick-icon">🏫</div>
+        <div class="quick-text">Kelas</div>
+    </a>
+
+    <a href="{% url 'transaksi' %}" class="quick-item">
+        <div class="quick-icon">💰</div>
+        <div class="quick-text">Transaksi</div>
+    </a>
+
+    <a href="{% url 'laporan' %}" class="quick-item">
+        <div class="quick-icon">📊</div>
+        <div class="quick-text">Laporan</div>
+    </a>
+
+    <a href="{% url 'data_pengumuman' %}" class="quick-item">
+        <div class="quick-icon">📢</div>
+        <div class="quick-text">Pengumuman</div>
+    </a>
+
+
+            </section>
+
+
+            <!-- =========================
+                 CHART
+            ========================== -->
+
+            <div class="section-title">
+
+                <h2>
+                    Aktivitas Tabungan
+                </h2>
+
+            </div>
+
+
+            <section class="chart-card">
+
+                <div class="chart-header">
+
+                    <div>
+
+                        <div class="chart-title">
+                            Transaksi
+                        </div>
+
+                        <div class="chart-subtitle">
+                            Perbandingan aktivitas minggu ini
+                        </div>
+
+                    </div>
+
+
+                    <select class="chart-filter">
+
+                        <option>
+                            Minggu ini
+                        </option>
+
+                        <option>
+                            Bulan ini
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="chart">
+
+                    <div
+                        class="bar"
+                        style="height: 45%;"
+                    ></div>
+
+                    <div
+                        class="bar"
+                        style="height: 65%;"
+                    ></div>
+
+                    <div
+                        class="bar active"
+                        style="height: 88%;"
+                    ></div>
+
+                    <div
+                        class="bar"
+                        style="height: 55%;"
+                    ></div>
+
+                    <div
+                        class="bar"
+                        style="height: 72%;"
+                    ></div>
+
+                    <div
+                        class="bar"
+                        style="height: 92%;"
+                    ></div>
+
+                    <div
+                        class="bar"
+                        style="height: 64%;"
+                    ></div>
+
+                </div>
+
+
+                <div class="chart-labels">
+
+                    <span>
+                        Sen
+                    </span>
+
+                    <span>
+                        Sel
+                    </span>
+
+                    <span>
+                        Rab
+                    </span>
+
+                    <span>
+                        Kam
+                    </span>
+
+                    <span>
+                        Jum
+                    </span>
+
+                    <span>
+                        Sab
+                    </span>
+
+                    <span>
+                        Min
+                    </span>
+
+                </div>
+
+            </section>
+
+                      <!-- =========================
+                 AKTIVITAS TERBARU
+            ========================== -->
+
+            <div class="section-title">
+
+                <h2>
+                    Aktivitas Terbaru
+                </h2>
+
+                <a href="#">
+                    Lihat semua
+                </a>
+
+            </div>
+
+
+            <section class="activity-card">
+
+
+                <div class="activity">
+
+                    <div class="activity-icon">
+                        💰
+                    </div>
+
+                    <div class="activity-info">
+
+                        <div class="activity-name">
+                            Setoran - Ahmad Fauzan
+                        </div>
+
+                        <div class="activity-time">
+                            Hari ini • 08:15
+                        </div>
+
+                    </div>
+
+                    <div class="activity-amount deposit">
+                        +Rp 50.000
+                    </div>
+
+                </div>
+
+
+                <div class="activity">
+
+                    <div class="activity-icon">
+                        💵
+                    </div>
+
+                    <div class="activity-info">
+
+                        <div class="activity-name">
+                            Setoran - Rizky Ramadhan
+                        </div>
+
+                        <div class="activity-time">
+                            Hari ini • 07:52
+                        </div>
+
+                    </div>
+
+                    <div class="activity-amount deposit">
+                        +Rp 25.000
+                    </div>
+
+                </div>
+
+
+                <div class="activity">
+
+                    <div class="activity-icon">
+                        💸
+                    </div>
+
+                    <div class="activity-info">
+
+                        <div class="activity-name">
+                            Penarikan - Dimas Saputra
+                        </div>
+
+                        <div class="activity-time">
+                            Kemarin • 14:30
+                        </div>
+
+                    </div>
+
+                    <div class="activity-amount withdraw">
+                        -Rp 100.000
+                    </div>
+
+                </div>
+
+
+                <div class="activity">
+
+                    <div class="activity-icon">
+                        💰
+                    </div>
+
+                    <div class="activity-info">
+
+                        <div class="activity-name">
+                            Setoran - Siti Aulia
+                        </div>
+
+                        <div class="activity-time">
+                            Kemarin • 11:20
+                        </div>
+
+                    </div>
+
+                    <div class="activity-amount deposit">
+                        +Rp 75.000
+                    </div>
+
+                </div>
+
+
+            </section>
+
+        </main>
+
+
+        <!-- =========================
+             BOTTOM NAVIGATION
+        ========================== -->
+
+        <nav class="bottom-nav">
+
+    <a href="{% url 'admin_dashboard' %}" class="nav-item active">
+        <span class="nav-icon">🏠</span>
+        <span>Beranda</span>
+    </a>
+
+    <a href="{% url 'data_siswa' %}" class="nav-item">
+        <span class="nav-icon">👨‍🎓</span>
+        <span>Siswa</span>
+    </a>
+
+    <a href="{% url 'transaksi' %}" class="nav-item">
+        <span class="nav-icon">💳</span>
+        <span>Transaksi</span>
+    </a>
+
+    <a href="{% url 'laporan' %}" class="nav-item">
+        <span class="nav-icon">📊</span>
+        <span>Laporan</span>
+    </a>
+
+    <a href="{% url 'logout' %}" class="nav-item">
+        <span class="nav-icon">🚪</span>
+        <span>Keluar</span>
+    </a>
+
+        </nav>
+
+        <!-- =========================
+             JAVASCRIPT
+        ========================== -->
+
+        <script>
+
+            function showMenu() {
+
+                alert(
+                    "Menu Admin\n\n" +
+                    "👨‍🎓 Data Siswa\n" +
+                    "👨‍🏫 Data Guru\n" +
+                    "🏫 Data Kelas\n" +
+                    "💳 Transaksi\n" +
+                    "📊 Laporan\n" +
+                    "📢 Pengumuman\n" +
+                    "⚙️ Pengaturan"
+                );
+
+            }
+
+
+            /* Animasi kartu */
+
+            document.addEventListener(
+                "DOMContentLoaded",
+                function() {
+
+                    const cards =
+                        document.querySelectorAll(
+                            ".balance-card, " +
+                            ".stat-card, " +
+                            ".quick-item, " +
+                            ".chart-card, " +
+                            ".activity-card"
+                        );
+
+
+                    cards.forEach(
+                        function(card, index) {
+
+                            card.style.opacity = "0";
+
+                            card.style.transform =
+                                "translateY(12px)";
+
+
+                            setTimeout(
+                                function() {
+
+                                    card.style.transition =
+                                        ".45s ease";
+
+                                    card.style.opacity =
+                                        "1";
+
+                                    card.style.transform =
+                                        "translateY(0)";
+
+                                },
+                                80 + (index * 60)
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+            /* Navigasi aktif */
+
+            const navItems =
+                document.querySelectorAll(
+                    ".nav-item"
+                );
+
+
+            navItems.forEach(
+                function(item) {
+
+                    item.addEventListener(
+                        "click",
+                        function() {
+
+                            navItems.forEach(
+                                function(nav) {
+
+                                    nav.classList.remove(
+                                        "active"
+                                    );
+
+                                }
+                            );
+
+
+                            this.classList.add(
+                                "active"
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+        </script>
+
+
+    </body>
+
+</html>

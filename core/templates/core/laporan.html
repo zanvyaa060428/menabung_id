@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan - Menabung.Id</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f8f6;
+            color: #222;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .back {
+            color: #16834b;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        h2 {
+            color: #173b2b;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .box {
+            background: white;
+            padding: 18px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+        }
+
+        .box span {
+            display: block;
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .box strong {
+            font-size: 20px;
+            color: #16834b;
+        }
+
+        .transaction {
+            background: white;
+            padding: 16px;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+        }
+
+        .transaction strong {
+            color: #173b2b;
+        }
+
+        .setor {
+            color: #16834b;
+        }
+
+        .tarik {
+            color: #d64545;
+        }
+
+        .info {
+            margin-top: 8px;
+            color: #666;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .empty {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            color: #888;
+        }
+
+        @media (max-width: 500px) {
+            .summary {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="{% url 'admin_dashboard' %}" class="back">
+        ← Kembali ke Dashboard
+    </a>
+
+    <h2>📊 Laporan Tabungan</h2>
+
+    <p class="subtitle">
+        Ringkasan transaksi tabungan siswa
+    </p>
+
+    <div class="summary">
+
+        <div class="box">
+            <span>💰 Total Setoran</span>
+            <strong>
+                Rp {{ total_setor|floatformat:0 }}
+            </strong>
+        </div>
+
+        <div class="box">
+            <span>💸 Total Penarikan</span>
+            <strong>
+                Rp {{ total_tarik|floatformat:0 }}
+            </strong>
+        </div>
+
+    </div>
+
+    <h3>📜 Daftar Transaksi</h3>
+
+    {% for item in transaksi_list %}
+
+    <div class="transaction">
+
+        <strong class="{% if item.jenis == 'setor' %}setor{% else %}tarik{% endif %}">
+            {% if item.jenis == "setor" %}
+                🟢 Setoran
+            {% else %}
+                🔴 Penarikan
+            {% endif %}
+        </strong>
+
+        <div class="info">
+            Nominal: Rp {{ item.nominal|floatformat:0 }}<br>
+
+            Saldo sebelum:
+            Rp {{ item.saldo_sebelum|floatformat:0 }}<br>
+
+            Saldo sesudah:
+            Rp {{ item.saldo_sesudah|floatformat:0 }}<br>
+
+            {% if item.keterangan %}
+                Keterangan: {{ item.keterangan }}<br>
+            {% endif %}
+
+            Tanggal:
+            {{ item.tanggal|date:"d M Y H:i" }}
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="empty">
+        Belum ada transaksi.
+    </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

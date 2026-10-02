@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | Menabung.Id</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 0% 0%,
+                    #d9fbe8 0,
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 100% 20%,
+                    #c7f9d9 0,
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 50% 100%,
+                    #dffbea 0,
+                    transparent 35%
+                ),
+                #f5fff9;
+
+            color: #12372b;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================
+           DECORATION
+        ========================== */
+
+        .blob {
+
+            position: fixed;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            filter: blur(1px);
+
+            z-index: 0;
+        }
+
+
+        .blob-1 {
+
+            width: 180px;
+            height: 180px;
+
+            background: #c9f5d8;
+
+            top: -80px;
+            left: -70px;
+
+            opacity: .75;
+        }
+
+
+        .blob-2 {
+
+            width: 150px;
+            height: 150px;
+
+            background: #b7efd0;
+
+            right: -65px;
+            top: 190px;
+
+            opacity: .6;
+        }
+
+
+        .blob-3 {
+
+            width: 210px;
+            height: 210px;
+
+            background: #d8f8e4;
+
+            bottom: -100px;
+            left: -90px;
+
+            opacity: .8;
+        }
+
+
+        .leaf {
+
+            position: fixed;
+
+            font-size: 45px;
+
+            opacity: .35;
+
+            z-index: 0;
+
+            user-select: none;
+        }
+
+
+        .leaf-1 {
+
+            top: 90px;
+            left: 15px;
+
+            transform: rotate(-25deg);
+        }
+
+
+        .leaf-2 {
+
+            right: 15px;
+            bottom: 180px;
+
+            transform: rotate(25deg);
+        }
+
+
+        /* =========================
+           MAIN
+        ========================== */
+
+        .page {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            padding: 24px 16px;
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 460px;
+        }
+
+
+        /* =========================
+           BRAND
+        ========================== */
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 24px;
+
+            padding-left: 5px;
+        }
+
+
+        .brand-icon {
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #31b86c,
+                    #16894d
+                );
+
+            border-radius: 15px;
+
+            font-size: 25px;
+
+            box-shadow:
+                0 10px 25px
+                rgba(28, 155, 88, .22);
+        }
+
+
+        .brand-text {
+
+            line-height: 1.1;
+        }
+
+
+        .brand-name {
+
+            font-size: 25px;
+
+            font-weight: 800;
+
+            color: #123f2e;
+
+            letter-spacing: -.7px;
+        }
+
+
+        .brand-name span {
+
+            color: #31a967;
+        }
+
+
+        .brand-subtitle {
+
+            font-size: 11px;
+
+            color: #719184;
+
+            margin-top: 4px;
+
+            font-weight: 500;
+        }
+
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+
+            position: relative;
+
+            padding: 10px 4px 22px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+
+        .hero-text {
+
+            flex: 1;
+        }
+
+
+        .badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            padding: 7px 11px;
+
+            border-radius: 50px;
+
+            background: #e1f8ea;
+
+            color: #238452;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+        }
+
+
+        .hero h1 {
+
+            font-size: 27px;
+
+            line-height: 1.15;
+
+            letter-spacing: -.8px;
+
+            color: #123c2d;
+
+            margin-bottom: 9px;
+        }
+
+
+        .hero h1 span {
+
+            color: #2ca765;
+        }
+
+
+        .hero p {
+
+            font-size: 12px;
+
+            line-height: 1.6;
+
+            color: #719184;
+
+            max-width: 265px;
+        }
+
+
+        /* =========================
+           SAVINGS ILLUSTRATION
+        ========================== */
+
+        .illustration {
+
+            position: relative;
+
+            width: 120px;
+            height: 125px;
+
+            flex-shrink: 0;
+        }
+
+
+        .circle {
+
+            position: absolute;
+
+            width: 105px;
+            height: 105px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #e1fae9,
+                    #c4f2d5
+                );
+
+            right: 0;
+            top: 10px;
+        }
+
+
+        .book {
+
+            position: absolute;
+
+            width: 78px;
+            height: 20px;
+
+            border-radius: 5px;
+
+            right: 8px;
+
+            box-shadow:
+                0 4px 8px
+                rgba(0,0,0,.08);
+        }
+
+
+        .book-1 {
+
+            bottom: 18px;
+
+            background: #36aa68;
+
+            transform: rotate(-3deg);
+        }
+
+
+        .book-2 {
+
+            bottom: 37px;
+
+            background: #79c993;
+
+            transform: rotate(3deg);
+        }
+
+
+        .coin {
+
+            position: absolute;
+
+            width: 52px;
+            height: 52px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffd978,
+                    #eeb83d
+                );
+
+            border: 4px solid #fff3c9;
+
+            right: 30px;
+
+            bottom: 48px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+            color: #9b6c12;
+
+            box-shadow:
+                0 8px 15px
+                rgba(170, 120, 20, .15);
+        }
+
+
+        .plant {
+
+            position: absolute;
+
+            font-size: 27px;
+
+            right: 1px;
+            bottom: 0;
+
+            transform: rotate(10deg);
+        }
+
+              /* =========================
+           LOGIN CARD
+        ========================== */
+
+        .login-card {
+
+            background:
+                rgba(255, 255, 255, .88);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border: 1px solid
+                rgba(255, 255, 255, .9);
+
+            border-radius: 28px;
+
+            padding: 25px 21px 22px;
+
+            box-shadow:
+                0 18px 50px
+                rgba(43, 116, 76, .12);
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .login-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            background: #e4faeb;
+
+            border-radius: 50%;
+
+            right: -90px;
+            top: -90px;
+
+            opacity: .7;
+        }
+
+
+        .login-header {
+
+            position: relative;
+
+            z-index: 2;
+
+            margin-bottom: 22px;
+        }
+
+
+        .login-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            font-size: 23px;
+
+            font-weight: 800;
+
+            color: #153e30;
+
+            margin-bottom: 5px;
+        }
+
+
+        .wave {
+
+            font-size: 22px;
+        }
+
+
+        .login-description {
+
+            font-size: 12px;
+
+            color: #789589;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           FORM
+        ========================== */
+
+        .form-group {
+
+            position: relative;
+
+            z-index: 2;
+
+            margin-bottom: 15px;
+        }
+
+
+        .form-label {
+
+            display: block;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            color: #315548;
+
+            margin-bottom: 7px;
+
+            padding-left: 3px;
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            width: 29px;
+            height: 29px;
+
+            border-radius: 9px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #e5f8eb;
+
+            font-size: 14px;
+
+            z-index: 2;
+        }
+
+
+        .input-wrapper input {
+
+            width: 100%;
+
+            height: 52px;
+
+            border: 1.5px solid
+                #dcebe2;
+
+            border-radius: 15px;
+
+            outline: none;
+
+            background: #fbfffc;
+
+            padding:
+                0 48px 0 55px;
+
+            font-size: 13px;
+
+            color: #183e30;
+
+            transition:
+                .25s ease;
+
+            box-shadow:
+                0 3px 12px
+                rgba(30, 100, 60, .025);
+        }
+
+
+        .input-wrapper input::placeholder {
+
+            color: #a3b7ad;
+        }
+
+
+        .input-wrapper input:focus {
+
+            border-color: #45b875;
+
+            background: #ffffff;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(69, 184, 117, .10);
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 14px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+            color: #78978a;
+
+            padding: 5px;
+        }
+
+
+        /* =========================
+           OPTIONS
+        ========================== */
+
+        .form-options {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            margin:
+                4px 2px 18px;
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            font-size: 11px;
+
+            color: #718b80;
+
+            cursor: pointer;
+        }
+
+
+        .remember input {
+
+            appearance: none;
+
+            width: 17px;
+            height: 17px;
+
+            border-radius: 6px;
+
+            border: 1.5px solid
+                #c9ded2;
+
+            background: white;
+
+            cursor: pointer;
+
+            position: relative;
+        }
+
+
+        .remember input:checked {
+
+            background: #35ad68;
+
+            border-color: #35ad68;
+        }
+
+
+        .remember input:checked::after {
+
+            content: "✓";
+
+            position: absolute;
+
+            color: white;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            left: 3px;
+            top: 0px;
+        }
+
+
+        .forgot {
+
+            color: #299b5b;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        .forgot:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================== */
+
+        .login-button {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            height: 54px;
+
+            border: none;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #45bd76,
+                    #249b5b
+                );
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            box-shadow:
+                0 10px 22px
+                rgba(39, 159, 91, .22);
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+        }
+
+
+        .login-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 14px 28px
+                rgba(39, 159, 91, .28);
+        }
+
+
+        .login-button:active {
+
+            transform:
+                scale(.98);
+        }
+
+
+        .button-arrow {
+
+            width: 29px;
+            height: 29px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,.22);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           DIVIDER
+        ========================== */
+
+        .divider {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin: 19px 0;
+        }
+
+
+        .divider::before,
+        .divider::after {
+
+            content: "";
+
+            height: 1px;
+
+            flex: 1;
+
+            background: #e2eee7;
+        }
+
+
+        .divider span {
+
+            color: #9aafa5;
+
+            font-size: 10px;
+
+            font-weight: 600;
+          }
+
+              /* =========================
+           ADMIN BUTTON
+        ========================== */
+
+        .admin-button {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            height: 50px;
+
+            border-radius: 15px;
+
+            border: 1.5px solid #cdebd8;
+
+            background: #f7fffa;
+
+            color: #258c55;
+
+            text-decoration: none;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            transition: .2s ease;
+        }
+
+
+        .admin-button:hover {
+
+            background: #eaf9ef;
+
+            border-color: #9ed8b4;
+
+            transform: translateY(-1px);
+        }
+
+
+        .admin-icon {
+
+            width: 27px;
+            height: 27px;
+
+            border-radius: 9px;
+
+            background: #dff6e7;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 14px;
+        }
+
+
+        .admin-arrow {
+
+            margin-left: auto;
+
+            margin-right: 15px;
+
+            font-size: 18px;
+
+            color: #42a96d;
+        }
+
+
+        /* =========================
+           SECURITY
+        ========================== */
+
+        .security {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            margin-top: 18px;
+
+            color: #91a79c;
+
+            font-size: 9px;
+        }
+
+
+        .security-icon {
+
+            width: 22px;
+            height: 22px;
+
+            border-radius: 7px;
+
+            background: #e7f7ed;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #319a5c;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           ERROR MESSAGE
+        ========================== */
+
+        .error {
+
+            position: relative;
+
+            z-index: 3;
+
+            background: #fff1f1;
+
+            border: 1px solid #ffd4d4;
+
+            color: #c94a4a;
+
+            padding: 10px 12px;
+
+            border-radius: 12px;
+
+            font-size: 11px;
+
+            margin-bottom: 15px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        .footer {
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            color: #9aada4;
+
+            font-size: 9px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 380px) {
+
+            .page {
+
+                padding:
+                    18px 13px;
+            }
+
+
+            .brand {
+
+                margin-bottom: 18px;
+            }
+
+
+            .brand-icon {
+
+                width: 43px;
+                height: 43px;
+
+                font-size: 22px;
+            }
+
+
+            .brand-name {
+
+                font-size: 22px;
+            }
+
+
+            .hero {
+
+                padding-bottom: 16px;
+            }
+
+
+            .hero h1 {
+
+                font-size: 24px;
+            }
+
+
+            .hero p {
+
+                font-size: 11px;
+            }
+
+
+            .illustration {
+
+                width: 105px;
+                height: 110px;
+
+                transform: scale(.9);
+            }
+
+
+            .login-card {
+
+                padding:
+                    21px 17px 19px;
+
+                border-radius: 24px;
+            }
+
+
+            .login-title {
+
+                font-size: 21px;
+            }
+
+
+            .input-wrapper input {
+
+                height: 49px;
+
+                border-radius: 14px;
+            }
+
+
+            .login-button {
+
+                height: 51px;
+            }
+        }
+
+
+        /* =========================
+           VERY SMALL PHONE
+        ========================== */
+
+        @media (max-width: 330px) {
+
+            .hero {
+
+                display: block;
+            }
+
+
+            .hero-text {
+
+                text-align: center;
+            }
+
+
+            .hero p {
+
+                margin: auto;
+            }
+
+
+            .illustration {
+
+                margin:
+                    5px auto 0;
+            }
+
+
+            .login-card {
+
+                padding:
+                    19px 15px;
+            }
+
+
+            .form-options {
+
+                font-size: 10px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- Dekorasi background -->
+
+    <div class="blob blob-1"></div>
+
+    <div class="blob blob-2"></div>
+
+    <div class="blob blob-3"></div>
+
+    <div class="leaf leaf-1">🌿</div>
+
+    <div class="leaf leaf-2">🍃</div>
+
+
+    <main class="page">
+
+        <div class="container">
+
+
+            <!-- BRAND -->
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    💰
+                </div>
+
+                <div class="brand-text">
+
+                    <div class="brand-name">
+                        Menabung<span>.Id</span>
+                    </div>
+
+                    <div class="brand-subtitle">
+                        Sistem Informasi Tabungan Sekolah
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- HERO -->
+
+            <div class="hero">
+
+                <div class="hero-text">
+
+                    <div class="badge">
+                        ✨ TABUNGAN DIGITAL
+                    </div>
+
+                    <h1>
+                        Menabung Hari Ini,
+                        <span>Lebih Baik.</span>
+                    </h1>
+
+                    <p>
+                        Kelola tabungan sekolah dengan
+                        mudah, aman, dan transparan.
+                    </p>
+
+                </div>
+
+
+                <!-- ILUSTRASI -->
+
+                <div class="illustration">
+
+                    <div class="circle"></div>
+
+                    <div class="book book-1"></div>
+
+                    <div class="book book-2"></div>
+
+                    <div class="coin">
+                        Rp
+                    </div>
+
+                    <div class="plant">
+                        🌱
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOGIN CARD -->
+
+            <section class="login-card">
+
+                <div class="login-header">
+
+                    <div class="login-title">
+
+                        <span class="wave">👋</span>
+
+                        Selamat Datang!
+
+                    </div>
+
+                    <p class="login-description">
+                        Masuk untuk melanjutkan ke
+                        sistem tabungan sekolah.
+                    </p>
+
+                </div>
+
+                            {% if messages %}
+
+                    {% for message in messages %}
+
+                        <div class="error">
+                            ⚠️ {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                {% endif %}
+
+
+                <!-- FORM LOGIN -->
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <!-- USERNAME -->
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Username
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <div class="input-icon">
+                                👤
+                            </div>
+
+                            <input
+                                type="text"
+                                name="username"
+                                placeholder="Masukkan username"
+                                autocomplete="username"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <div class="input-icon">
+                                🔒
+                            </div>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Masukkan password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword()"
+                                id="passwordToggle"
+                            >
+                                👁️
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+
+                    <div class="form-options">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                name="remember"
+                            >
+
+                            <span>
+                                Ingat saya
+                            </span>
+
+                        </label>
+
+
+                        <a
+                            href="#"
+                            class="forgot"
+                            onclick="return false;"
+                        >
+                            Lupa password?
+                        </a>
+
+                    </div>
+
+
+                    <!-- LOGIN -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                    >
+
+                        <span>
+                            Masuk ke Sistem
+                        </span>
+
+                        <span class="button-arrow">
+                            →
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+                <!-- DIVIDER -->
+
+                <div class="divider">
+
+                    <span>
+                        atau
+                    </span>
+
+                </div>
+
+
+                <!-- ADMIN -->
+
+                <a
+    href="{% url 'admin_dashboard' %}"
+    class="admin-button"
+>
+    <span class="admin-icon">
+        🛡️
+    </span>
+
+    <span>
+        Login sebagai Admin
+    </span>
+
+    <span class="admin-arrow">
+        ›
+    </span>
+                </a>
+
+
+                <!-- SECURITY -->
+
+                <div class="security">
+
+                    <span class="security-icon">
+                        ✓
+                    </span>
+
+                    <span>
+                        Aman • Terpercaya • Untuk Pendidikan
+                    </span>
+
+                </div>
+
+
+                <div class="footer">
+
+                    © 2026 Menabung.Id
+
+                    <br>
+
+                    Sistem Informasi Tabungan Sekolah
+
+                </div>
+
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const button =
+                document.getElementById("passwordToggle");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                button.textContent = "🙈";
+
+            } else {
+
+                password.type = "password";
+
+                button.textContent = "👁️";
+
+            }
+
+        }
+
+
+        /* Animasi masuk */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                const card =
+                    document.querySelector(".login-card");
+
+                const hero =
+                    document.querySelector(".hero");
+
+                const brand =
+                    document.querySelector(".brand");
+
+
+                brand.style.opacity = "0";
+                hero.style.opacity = "0";
+                card.style.opacity = "0";
+
+                brand.style.transform =
+                    "translateY(-10px)";
+
+                hero.style.transform =
+                    "translateY(10px)";
+
+                card.style.transform =
+                    "translateY(20px)";
+
+
+                setTimeout(function() {
+
+                    brand.style.transition =
+                        ".5s ease";
+
+                    brand.style.opacity = "1";
+
+                    brand.style.transform =
+                        "translateY(0)";
+
+                }, 100);
+
+
+                setTimeout(function() {
+
+                    hero.style.transition =
+                        ".6s ease";
+
+                    hero.style.opacity = "1";
+
+                    hero.style.transform =
+                        "translateY(0)";
+
+                }, 200);
+
+
+                setTimeout(function() {
+
+                    card.style.transition =
+                        ".7s ease";
+
+                    card.style.opacity = "1";
+
+                    card.style.transform =
+                        "translateY(0)";
+
+                }, 300);
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

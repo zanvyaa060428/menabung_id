@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Pengumuman</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f8f6;
+            color: #222;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #16834b;
+            text-decoration: none;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+        }
+
+        h2 {
+            color: #173b2b;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            background: #16834b;
+            color: white;
+            padding: 13px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <a href="{% url 'data_pengumuman' %}" class="back">
+        ← Kembali ke Pengumuman
+    </a>
+
+    <div class="card">
+
+        <h2>📢 Tambah Pengumuman</h2>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <label>Judul Pengumuman</label>
+
+            <input
+                type="text"
+                name="judul"
+                placeholder="Masukkan judul pengumuman"
+                required
+            >
+
+            <label>Isi Pengumuman</label>
+
+            <textarea
+                name="isi"
+                placeholder="Masukkan isi pengumuman"
+                required
+            ></textarea>
+
+            <button type="submit">
+                Simpan Pengumuman
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
